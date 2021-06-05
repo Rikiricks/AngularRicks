@@ -1,0 +1,32 @@
+{
+  "employees": [
+    {
+      "Id": 1,
+      "fullName": "c#",
+      "contactPref": "email",
+      "email": "riki@gmail.com",
+      "phone": "986556979460",
+      "skills": [
+        {
+          "skillName": ".net",
+          "experiance": 5,
+          "proficiency": "pro"
+        }
+      ]
+    },
+    {
+      "Id": 2,
+      "fullName": "c#",
+      "contactPref": "email",
+      "email": "riki@ricks.com",
+      "phone": "986556979460",
+      "skills": [
+        {
+          "skillName": ".net",
+          "experiance": 5,
+          "proficiency": "pro"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Create Employee</h3>
+        </div>
+        <div class="panel-body">
+            <div class="form-group" [ngClass]="{ 'has-error': employeeForm.get('fullName').errors
+            && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)}">
+                <label class="col-sm-2 control-label" for="fullName">Full Name</label>
+                <div class="col-sm-8">
+                <input type="text" formControlName="fullName" id="fullName" class="form-control">
+                <!-- <input type="text" [value]="employeeForm.get('fullName').value.length"> -->
+                <span class="help-block" *ngIf="employeeForm.get('fullName').errors
+                && (employeeForm.get('fullName').touched || employeeForm.get('fullName').dirty)">
+                
+                <span *ngIf="employeeForm.get('fullName').errors.required">
+                    Full Name is required.
+                </span>
+                <span *ngIf="employeeForm.get('fullName').errors.minlength || employeeForm.get('fullName').errors.maxlength">
+                    Full Name must be min 3 characters and max 10 characters.
+                </span>
+
+                </span>
+            </div>      
+           
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Contact Pref</label>
+                <div class="col-sm-8">
+                    <label class="radio-inline">
+                        <input type="radio" value="email" formControlName="contactPref"> Email
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" value="phone" formControlName="contactPref"> Phone
+                    </label>
+             
+                </div>      
+            </div>
+
+<div formGroupName="emailGroup" [ngClass]="{'has-error':formErrors.emailGroup}">
+            <div class="form-group" [ngClass]="{'has-error':formErrors.email}">
+                <label class="col-sm-2 control-label" for="email">Email</label>
+                <div class="col-sm-8">
+                <input type="text" (blur)="loadValidationMsj()" formControlName="email" id="email" class="form-control">    
+                
+                <span class="help-block" *ngIf="formErrors.email">
+                   
+                    <span *ngIf="formErrors.email">
+                        {{formErrors.email}}
+                    </span>                  
+                </span>  
+                </div>                
+            </div>
+
+            <div class="form-group" [ngClass]="{'has-error':formErrors.confEmail}">
+                <label class="col-sm-2 control-label" for="confEmail">Confirm Email</label>
+                <div class="col-sm-8">
+                <input type="text" (blur)="loadValidationMsj()" formControlName="confEmail" id="confEmail" class="form-control">    
+                
+                
+                   
+                    <span class="help-block" *ngIf="formErrors.confEmail || formErrors.emailGroup">
+                        {{formErrors.confEmail ? formErrors.confEmail : formErrors.emailGroup}}
+                    </span>                  
+                
+                </div>                
+            </div>
+        </div>
+
+            <div class="form-group" [ngClass]="{'has-error':formErrors.phone}">
+                <label class="col-sm-2 control-label" for="phone">Phone</label>
+                <div class="col-sm-8">
+                <input type="text" (blur)="loadValidationMsj()" formControlName="phone" id="phone" class="form-control">    
+                
+                <span class="help-block"  *ngIf="formErrors.phone">
+                    {{formErrors.phone}}
+                </span>  
+               
+                </div>
+                
+            </div>
+            <div class="well">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-sm-2">
+                    <input type="button" [disabled]="employeeForm.get('skills').invalid" (click)="addMoreSkill()" class="btn btn-primary" value="Add">
+                </div>
+            </div>
+            <div formArrayName="skills" *ngFor="let skill of employeeForm.get('skills')?.controls; let i = index">
+            <hr [style.border]="'1px solid'" *ngIf="i>0">
+                <div [formGroupName]="i">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" [attr.for]="'skillName'+i">Skill</label>
+                    <div class="col-sm-4" [class.has-error]="skill.get('skillName').touched && skill.get('skillName').invalid">
+                        <input [id]="'skillName'+i" type="text" formControlName="skillName">
+                        <span class="help-block" *ngIf="skill.get('skillName').errors?.required && skill.get('skillName').touched">
+                            Skill name is required.
+                        </span>
+                    </div>
+                    
+                    
+                    <label class="col-sm-2 control-label" [attr.for]="'experiance'+i">Experiance</label>
+                    <div class="col-sm-4">
+                        <input type="number" [id]="'experiance'+i" formControlName="experiance">
+                    </div>
+                                
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Proficiency</label>
+                    <div class="col-sm-8">
+                        <label class="radio-inline">
+                            <input type="radio" value="NOOB" formControlName="proficiency"> Noob
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" value="PRO" formControlName="proficiency"> Pro
+                        </label>
+                 
+                    </div>      
+                </div>
+                <div class="form-group">
+                <div class="col-sm-offset-2" *ngIf="i>0">
+                    <button class="btn btn-danger" (click)="removeSkill(i)">Remove</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="panel-footer">
+            <div class="btn-toolbar">   
+                <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-primary" (click)="loadData()">Load Data</button>     
+                  </div>
+            
+        </div>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<div class="panel panel-primary">
+<div class="panel-heading">
+ <h3>Employees</h3>
+</div>
+<div class="panel-body">
+<div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Full Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+            <tbody *ngFor="let emp of employees;">
+                <tr>
+                    <td>{{emp.Id}}</td>
+                    <td>{{emp.fullName}}</td>
+                    <td>{{emp.email}}</td>
+                    <td>{{emp.phone}}</td>                   
+                    <td><button class="btn btn-primary" (click)="editEmployee(emp.Id)">Edit</button></td>
+                  </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+</div>
+<div class="panel-footer">
+
+</div>
+</div>
+    
